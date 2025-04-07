@@ -4,8 +4,11 @@ namespace App\Domain\Link\Models;
 
 use App\Domain\User\Models\User;
 use App\Infrastructure\Abstracts\Models\BaseModel;
+use Database\Factories\LinkFactory;
+use Database\Factories\UserFactory;
 use Eloquent;
 use Illuminate\Database\Eloquent\Builder;
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Support\Carbon;
 
@@ -38,6 +41,8 @@ use Illuminate\Support\Carbon;
  */
 class Link extends BaseModel
 {
+    use HasFactory;
+
     /**
      * The attributes that are mass assignable.
      *
@@ -55,5 +60,13 @@ class Link extends BaseModel
     public function user(): BelongsTo
     {
         return $this->belongsTo(User::class);
+    }
+
+    /**
+     * Create a new factory instance for the model.
+     */
+    protected static function newFactory()
+    {
+        return LinkFactory::new();
     }
 }

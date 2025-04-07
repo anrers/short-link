@@ -1,0 +1,41 @@
+version: '3'
+
+networks:
+  short-link:
+
+services:
+  app:
+    container_name: short-link-nginx
+    build:
+      context: ./dockerfiles
+      dockerfile: nginx.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+    ports:
+      - "83:80"
+    volumes:
+      - ./src:/var/www/html:delegated
+    depends_on:
+      - php
+    networks:
+      - short-link
+  php:
+    container_name: short-link-php
+    build:
+      context: ./dockerfiles
+      dockerfile: php.dockerfile
+      args:
+        - UID=${UID:-1000}
+        - GID=${GID:-1000}
+        - XDEBUG_REMOTE_HOST=${XDEBUG_REMOTE_HOST}
+    ports:
+      - "9004:9000"
+    volumes:
+      - ./src:/var/www/html:delegated
+    environment:
+      PHP_IDE_CONFIG: serverName=${COMPOSE_PROJECT_NAME}
+    networks:
+      - short-link
+    extra_hosts:
+      - "host.docker.internal:host-gateway"

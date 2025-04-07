@@ -3,8 +3,8 @@
 namespace App\Domain\Link\Actions;
 
 use App\Domain\Link\Contracts\Actions\CreateLinkContract;
+use App\Domain\Link\Contracts\Repositories\LinkRepositoryContract;
 use App\Domain\Link\Models\Link;
-use App\Domain\Link\Repositories\LinkRepository;
 use App\Domain\Link\Tasks\GenerateCodeTask;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Log;
@@ -14,7 +14,7 @@ class CreateLinkAction implements CreateLinkContract
     protected int $maxAttempts = 5;
 
     public function __construct(
-        protected LinkRepository $linkRepository,
+        protected LinkRepositoryContract $linkRepository,
         protected GenerateCodeTask $codeTask
     ) {
     }

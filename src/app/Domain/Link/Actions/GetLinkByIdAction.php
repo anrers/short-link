@@ -3,13 +3,13 @@
 namespace App\Domain\Link\Actions;
 
 use App\Domain\Link\Contracts\Actions\GetLinkByIdContract;
+use App\Domain\Link\Contracts\Repositories\LinkRepositoryContract;
 use App\Domain\Link\Models\Link;
-use App\Domain\Link\Repositories\LinkRepository;
 
 class GetLinkByIdAction implements GetLinkByIdContract
 {
     public function __construct(
-        protected LinkRepository $linkRepository
+        protected LinkRepositoryContract $linkRepository
     ) {
     }
 

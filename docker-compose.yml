@@ -39,3 +39,17 @@ services:
       - short-link
     extra_hosts:
       - "host.docker.internal:host-gateway"
+  mysql:
+    image: mysql:8.0
+    restart: unless-stopped
+    container_name: short-link-mysql
+    tty: true
+    ports:
+      - "3396:3306"
+    environment:
+      MYSQL_ROOT_PASSWORD: ${MYSQL_ROOT_PASSWORD}
+      SERVICE_NAME: mysql
+    networks:
+      - short-link
+    volumes:
+      - ./dockerfiles/volumes/mysql/lib:/var/lib/mysql

@@ -10,10 +10,6 @@ use App\Domain\Link\Controllers\UpdateLinkController;
 use App\Domain\Link\Controllers\DeleteLinkController;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', function () {
-    return view('welcome');
-});
-
 Route::prefix('auth')->group(function () {
     Route::post('sign-in', SigninController::class);
     Route::post('sign-out', SignoutController::class);

@@ -9,8 +9,6 @@ use App\Domain\Link\Tasks\GenerateCodeTask;
 use Illuminate\Database\UniqueConstraintViolationException;
 use Log;
 
-use function Laravel\Prompts\confirm;
-
 class CreateLinkAction implements CreateLinkContract
 {
     protected int $maxAttempts = 5;

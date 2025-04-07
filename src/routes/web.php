@@ -3,6 +3,7 @@
 use App\Domain\Auth\Controllers\SignInController;
 use App\Domain\Auth\Controllers\SignOutController;
 use App\Domain\Link\Controllers\CreateLinkController;
+use App\Domain\Link\Controllers\RedirectController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', function () {
@@ -17,3 +18,6 @@ Route::prefix('auth')->group(function () {
 Route::middleware('auth')->prefix('link')->group(function () {
     Route::post('/', CreateLinkController::class);
 });
+
+//Should be last
+Route::get('/{code}', RedirectController::class);

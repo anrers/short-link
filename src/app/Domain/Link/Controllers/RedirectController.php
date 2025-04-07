@@ -3,6 +3,7 @@
 namespace App\Domain\Link\Controllers;
 
 use App\Domain\Link\Contracts\Actions\GetLinkByCodeContract;
+use App\Domain\Link\Jobs\IncreaseLinkUseCounterJob;
 use App\Infrastructure\Abstracts\Controllers\Controller;
 use Illuminate\Http\RedirectResponse;
 use Log;
@@ -22,6 +23,7 @@ class RedirectController extends Controller
     ): RedirectResponse {
         try {
             $link = $action->__invoke($code);
+            IncreaseLinkUseCounterJob::dispatch($link->id);
             return redirect($link->original);
         } catch (Throwable $exception) {
             Log::error(

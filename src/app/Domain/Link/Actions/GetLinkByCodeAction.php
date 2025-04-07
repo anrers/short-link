@@ -8,8 +8,6 @@ use App\Domain\Link\Repositories\LinkRepository;
 
 class GetLinkByCodeAction implements GetLinkByCodeContract
 {
-    protected int $maxAttempts = 5;
-
     public function __construct(
         protected LinkRepository $linkRepository,
     ) {
